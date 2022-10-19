@@ -1,7 +1,7 @@
 /*estilos.css*/
 
 #first_p {
-	color: pink
+	color: pink;
 }
 
 tr {
@@ -18,7 +18,7 @@ a:hover {
 }
 
 article {
-	background: pink
+	background: pink;
 }
 
 article p::first-line {
@@ -32,8 +32,8 @@ article p::first-line {
 
 img+p {
 	color: brown;
-
-	) #second_p {
+}
+#second_p {
 		color: purple
 	}
 

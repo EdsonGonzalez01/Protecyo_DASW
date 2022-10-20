@@ -1,6 +1,10 @@
 /*
 Tamaño de fuente
  */
+h1{
+	text-align: center;
+}
+
 body {
 	font-size: 12px;
 	background-color:#b4d8f9;
@@ -24,11 +28,29 @@ a:visited {
 	border-radius: 15px;
 	padding: 30px 9px 30px 9px;
 }
-#IngressLog {
-	width: 300px;
+
+#ActContainer {
+	width: 500px;
+	margin: 10em auto;
+	background-color: #68b2f3;
+	border: 10px;
+	height: 750px;
+	border-radius: 15px;
+	padding: 30px 9px 30px 9px;
 }
-#SignUP {
-	width: 300px;
+
+.button-container{
+	align-self: start;
+	align-content: center;
+	text-align: center;
+}
+
+
+#IngressLog, #SignUP{
+	margin-top: 40px;
+	position: relative;
+	display: inline-block;
+	
 }
 /**
  * Se aplica al contenedor donde muestra en el pie

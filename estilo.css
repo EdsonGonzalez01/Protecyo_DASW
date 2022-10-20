@@ -40,6 +40,11 @@ a:visited {
 }
 
 .button-container{
+	margin-top: 30px;
+	text-align: center;
+}
+
+/*.button-container{
 	align-self: start;
 	align-content: center;
 	text-align: center;

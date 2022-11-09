@@ -1,0 +1,27 @@
+{
+  "name": "proyecto_ssh",
+  "version": "1.0.0",
+  "description": "proyecto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdsonGonzalez01/Proyecto_DASW.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EdsonGonzalez01/Proyecto_DASW/issues"
+  },
+  "homepage": "https://github.com/EdsonGonzalez01/Proyecto_DASW#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^19.0.1"
+  }
+}

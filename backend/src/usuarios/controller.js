@@ -16,23 +16,23 @@ function traerUnUsuario(req, res){
 }
 
 function crearUnUsuario(req, res){
-    const id = req.params.id;
-    const nombre = req.query.nombre;
-    const correo = req.query.correo;
-    const password = req.query.password;
+    const id = req.body.id;
+    const nombre = req.body.nombre;
+    const correo = req.body.correo;
+    const password = req.body.password;
     res.send('Creando usuario ' + id + " " + nombre +" " + correo + " " + password);
 }
 
 function actualizarUnUsuario(req, res){
-    const id = req.params.id;
-    const nombre = req.query.nombre;
-    const correo = req.query.correo;
-    const password = req.query.password;
+    const id = req.body.id;
+    const nombre = req.body.nombre;
+    const correo = req.body.correo;
+    const password = req.body.password;
     res.send('Actualizando usuario ' + id + " " + nombre +" " + correo + " " + password);
 }
 
 function eliminarUnUsuario(req, res){
-    const id = req.params.id;
+    const id = req.body.id;
     res.send('Borrando usuario ' + id)
 }
 

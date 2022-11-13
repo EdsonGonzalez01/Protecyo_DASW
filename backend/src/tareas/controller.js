@@ -11,8 +11,12 @@ function traerTarea(req, res){
 }
 
 function traerUnaTarea(req, res){
-    const id = req.params.id;
-    res.send('Los datos de la tarea ' + id)
+    const id = req.body.id;
+    const descripcion = req.body.nombre;
+    const prioridad = req.body.correo;
+    const fecha_inicio = req.body.password;
+    const fecha_fin = req.body.password;
+    res.send('Los datos de la tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin)
     /*
         identificador
         descripcion
@@ -23,18 +27,26 @@ function traerUnaTarea(req, res){
 }
 
 function crearUnaTarea(req,res){
-    const id = req.params.id;
-    res.send('Creando tarea ' + id)
+    const id = req.body.id;
+    const descripcion = req.body.nombre;
+    const prioridad = req.body.correo;
+    const fecha_inicio = req.body.password;
+    const fecha_fin = req.body.password;
+    res.send('Creando tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin)
 }
 
 function eliminarUnaTarea(req,res){
-    const id = req.params.id;
+    const id = req.body.id;
     res.send('Eliminando tarea ' + id)
 }
 
 function actualizarUnaTarea(req,res){
-    const id = req.params.id;
-    res.send('Actualizando tarea ' + id)
+    const id = req.body.id;
+    const descripcion = req.body.nombre;
+    const prioridad = req.body.correo;
+    const fecha_inicio = req.body.password;
+    const fecha_fin = req.body.password;
+    res.send('Actualizando tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin);
 }
 
 module.exports = {

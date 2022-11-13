@@ -1,0 +1,42 @@
+//users
+
+/*{
+    "id": "456",
+    "nombre": "Juan Perez",
+    "correo": "hola@gmail.com",
+    "password": "Edson123"
+}*/
+
+//tasks
+/*{
+    "id": "1",
+    "descripcion": "Pasea al perro",
+    "prioridad": "Alta",
+    "fecha_inicio": "11/11/2022",
+    "fecha_fin": "12/11/2022"
+}*/
+
+//tasks
+/*{
+    "id": "TSK1",
+    "descripcion": "Pasea al perro",
+    "prioridad": "Alta",
+    "fecha_inicio": "11/11/2022",
+    "fecha_fin": "12/11/2022"
+}*/
+
+//comments
+/*{
+    "id": "1",
+    "idTarea": "TSK1",
+    "descripcion": "Bien Hecho",
+    "usuario": "456 - Juan Perez",
+    "fecha": "12/11/2022"
+}*/
+
+//categories
+/*{
+    "id": "1",
+    "color": "#FF0000",
+    "descripcion": "Importante"
+}*/

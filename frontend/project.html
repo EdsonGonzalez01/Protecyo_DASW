@@ -31,25 +31,9 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-8 col-xl-6">
           <div class="card rounded-3">
-            <div class="card-body p-4">
+            <div id="container" class="card-body p-4">
               <p class="mb-2"><span class="h2 me-2">TODOLIST</span>
-              <ul class="list-group rounded-0">
-                <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                  <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                  HTML con la estructura general del proyecto
-                </li>
-                <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                  <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                  HTML de cada una de las secciones que permitan al usuario, por cada módulo
-                </li>
-                <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                  <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                  CSS con los estilos de los diferentes elementos de las páginas de HTML
-                </li>
-                <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                  <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
-                  Crear las vistas (HTML) de las diferentes páginas de nuestro sitio web. 
-                </li>
+              <ul id="taskList" class="list-group rounded-0">
               </ul>
             </div>
           </div>
@@ -57,6 +41,12 @@
       </div>
     </div>
   </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"></script>
+  <script src="./scripts/main.js"></script>
+  <script>
+      getTasks();
+  </script>
+
 </body>
 <!--Prueba-->
 <!--FOOTER-->

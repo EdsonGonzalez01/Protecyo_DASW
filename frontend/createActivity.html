@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<!-- Temas-->
 	<link rel="stylesheet" type="text/css" href="estilo.css">
+    <script src="./scripts/main.js"></script>
 </head>
 
 <body>
@@ -20,32 +21,36 @@
         </div>
     </div>
 	<div id="ActContainer">
-			<form action="" method="post" name="FormEntrar" class="form-control-lg">
+			<form id="formTask" action="" method="post" name="FormEntrar" class="form-control-lg">
                 <div class="mb-3">
                     <h1>Create a task to be done</h1>
                     <label for="task" class="form-label">Task to be done</label>
-                    <input type="text" id="task" class="form-control" placeholder="ej. Make the bed">
+                    <input type="text" name="descripcion" id="task" class="form-Item form-control" placeholder="ej. Make the bed">
                     <label for="priority" class="form-label">Priority</label>
-                    <select id="priority" class="form-select" aria-label="Default select example">
+                    <select id="priority" name="priority" class="form-Item form-select" aria-label="Default select example">
                         <option value="1">Urgent</option>
                         <option value="2">Important</option>
                         <option value="2">Moderate</option>
                         <option value="3">Low</option>
                     </select>
-                    <label for="observations" class="form-label">Observations</label>
-                    <input type="textarea" id="observations" class="form-control" placeholder="ej. Make it before noon">
+                    <label for="observations"  class="form-label">Observations</label>
+                    <input type="textarea" name="observation" id="observations" class="form-Item form-control" placeholder="ej. Make it before noon">
                     <label for="startDate"class="form-label">Start Date</label><br>
-                    <input type="date" name="startDate" id="startDate"><br>
-                    <label for="endDate"class="form-label">End Date</label><br>
-                    <input type="date" name="endDate" id="endDate">
+                    <input type="date" name="start_Date" class="form-Item" name="startDate" id="startDate"><br>
+                    <label for="endDate" class="form-label">End Date</label><br>
+                    <input type="date" name="end_Date" class="form-Item" name="endDate" id="endDate">
 
                     <div class="button-container">
-
                         <button class="btn btn-lg btn-primary btn-block btn-signin" id="SignUP" type="submit">Create</button>	
                     </div>
                 </div>
 			</form>
 	</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"></script>
+    <script>
+        initCreateTask();
+    </script>
 </body>
 
 </html>

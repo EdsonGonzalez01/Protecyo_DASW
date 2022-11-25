@@ -1,3 +1,5 @@
+const modeloController = require('./model')
+
 function traerTarea(req, res){
     const pending= req.query.pending;
     const boolPending = pending === "true" ? true : false;
@@ -6,7 +8,11 @@ function traerTarea(req, res){
         res.send("solo tareas pendientes")
     }
     else{
-        res.send('todas las tareas')
+        modeloController.find({}).then(response =>{
+            console.log('Respuesta: ', response)
+            res.send(response);
+        }
+        ).catch(err=>{});
     }
 }
 
@@ -27,12 +33,29 @@ function traerUnaTarea(req, res){
 }
 
 function crearUnaTarea(req,res){
-    const id = req.body.id;
-    const descripcion = req.body.nombre;
-    const prioridad = req.body.correo;
-    const fecha_inicio = req.body.password;
-    const fecha_fin = req.body.password;
-    res.send('Creando tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin)
+    console.log(req.body);
+    const descripcion = req.body.descripcion;
+    const observacion = req.body.observation;
+    const prioridad = req.body.priority;
+    const fecha_inicio = req.body.start_Date;
+    const fecha_fin = req.body.end_Date;
+
+    const obj = {
+        descripcion : descripcion,
+        prioridad : prioridad,
+        observacion : observacion,
+        fecha_inicio :fecha_inicio,
+        fecha_fin : fecha_fin
+    }
+
+    modeloController.create(obj).then(response =>{
+        res.send(response);
+    }
+    ).catch(err=>{});
+
+
+    //res.send('Creando tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin);
+
 }
 
 function eliminarUnaTarea(req,res){

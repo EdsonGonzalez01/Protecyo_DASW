@@ -17,6 +17,27 @@ function getTasks() {
     })
 }
 
+
+function getCategories() {
+    axios.get('http://localhost:3000/categories/?token=123').then((respuesta) => {
+        const categorias = respuesta.data;
+        const contenedor = document.getElementById('headersCategories');
+
+        categorias.forEach(element => {
+            const descripcion = element.descripcion;
+            const color = element.color;
+            const fila = `                
+                <th style="color:${color}">
+                    ${descripcion}
+                </th>
+            `;
+            contenedor.innerHTML += fila;
+        });
+
+    })
+}
+
+
 function initCreateTask() {
     const form = document.getElementById('formTask');
     const campos = {};
@@ -30,6 +51,26 @@ function initCreateTask() {
         console.log(campos);
 
         axios.post('http://localhost:3000/tasks/create?token=123', campos).then((respuesta) => {
+            console.log(respuesta);
+
+        });
+    })
+}
+
+
+function initCreateCategory() {
+    const form = document.getElementById('formCategory');
+    const campos = {};
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const elementosForm = this.querySelectorAll(".form-category-Item")
+        console.log(elementosForm);
+        elementosForm.forEach(function (elemento) {
+            campos[elemento.name] = elemento.value;
+        })
+        console.log(campos);
+
+        axios.post('http://localhost:3000/categories/create?token=123', campos).then((respuesta) => {
             console.log(respuesta);
 
         });

@@ -97,6 +97,7 @@ Header @leoacg
   .header a.active {
 	background-color: dodgerblue;
 	color: white;
+	margin-right: 10px;
   }
   .header-right {
 	float: right;

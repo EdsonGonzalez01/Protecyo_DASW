@@ -1,18 +1,12 @@
-const {Schema, modul }=require('mogoose');
+const { Schema, model } = require ("mongoose")
 
-const schema=new Schema
-(
-    {
-        id: {
-            type:String
-        },
-        color: {
-            type:String
-        },
-        descripcion: {
-            type:String
-        }
-
+const schema=new Schema({
+    color: {
+        type:String
+    },
+    descripcion: {
+        type:String
+    }
 });
 
-module.exports = model('categoria',schema );
+module.exports = model('Categorias', schema);

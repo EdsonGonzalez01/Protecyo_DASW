@@ -1,6 +1,13 @@
+const modeloController = require('./model')
+
 function traerCategorias(req, res){
-    const id = req.body.id;
-    res.send('todas las categorias');
+    /*const id = req.body.id;
+    res.send('todas las categorias');*/
+    modeloController.find({}).then(response =>{
+        console.log('Respuesta: ', response)
+        res.send(response);
+    }
+    ).catch(err=>{});
 }
 
 function traerCategoria(req, res){
@@ -11,10 +18,19 @@ function traerCategoria(req, res){
 }
 
 function crearCategoria(req,res){
-    const id = req.query.id;
+    console.log(req.body);
     const color = req.body.color;
     const descripcion = req.body.descripcion;
-    res.send('Creando categoria ' + id + " " + color + " " + descripcion)
+
+    const obj = {
+        color: color,
+        descripcion : descripcion
+    }
+
+    modeloController.create(obj).then(response =>{
+        res.send(response);
+    }
+    ).catch(err=>{});
 }
 
 function eliminarCategoria(req,res){

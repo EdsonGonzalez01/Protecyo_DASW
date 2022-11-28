@@ -1,8 +1,7 @@
 const modeloController = require('./model')
+const tareasModeloController = require('../tareas/model')
 
 function traerCategorias(req, res){
-    /*const id = req.body.id;
-    res.send('todas las categorias');*/
     modeloController.find({}).then(response =>{
         console.log('Respuesta: ', response)
         res.send(response);
@@ -13,7 +12,6 @@ function traerCategorias(req, res){
 function traerCategoria(req, res){
     const id = req.body.id;
     const color = req.body.color;
-    const descripcion = req.body.descripcion;
     res.send('Los datos de la categoria ' + id + " " + color + " " + descripcion)
 }
 

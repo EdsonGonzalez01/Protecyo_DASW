@@ -1,4 +1,5 @@
 const modeloController = require('./model')
+var mongoose = require('mongoose');
 
 function traerTarea(req, res){
     const pending= req.query.pending;
@@ -16,29 +17,38 @@ function traerTarea(req, res){
     }
 }
 
+function traerTareaporCategoria(req, res){
+    const prioridad = req.params.prioridad;
+    console.log('Recibi: ' + prioridad);
+    modeloController.find({prioridad: prioridad}).then(response =>{
+        console.log('Respuesta: ', response)
+        res.send(response);
+    }
+    ).catch(err=>{});
+}
+
 function traerUnaTarea(req, res){
-    const id = req.body.id;
-    const descripcion = req.body.nombre;
-    const prioridad = req.body.correo;
-    const fecha_inicio = req.body.password;
-    const fecha_fin = req.body.password;
-    res.send('Los datos de la tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin)
-    /*
-        identificador
-        descripcion
-        fecha de creacion
-        fecha de vencimiento
-        usuarios
-    */ 
+    const taskId = req.params.taskId;
+    console.log("Estoy trayendo una tarea")
+    modeloController.findById(taskId, function (err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log(docs);
+            res.send(docs);
+        }
+    })
+    
 }
 
 function crearUnaTarea(req,res){
     console.log(req.body);
     const descripcion = req.body.descripcion;
-    const observacion = req.body.observation;
-    const prioridad = req.body.priority;
-    const fecha_inicio = req.body.start_Date;
-    const fecha_fin = req.body.end_Date;
+    const observacion = req.body.observacion;
+    const prioridad = req.body.prioridad;
+    const fecha_inicio = req.body.fecha_inicio;
+    const fecha_fin = req.body.fecha_fin;
 
     const obj = {
         descripcion : descripcion,
@@ -64,12 +74,36 @@ function eliminarUnaTarea(req,res){
 }
 
 function actualizarUnaTarea(req,res){
-    const id = req.body.id;
-    const descripcion = req.body.nombre;
-    const prioridad = req.body.correo;
-    const fecha_inicio = req.body.password;
-    const fecha_fin = req.body.password;
-    res.send('Actualizando tarea ' + id + " " + descripcion + " " + prioridad + " " + fecha_inicio + " " + fecha_fin);
+    const taskId = req.params.taskId;
+    console.log("Actualizando tarea: " + taskId);
+    console.log(req.body);
+    const descripcion = req.body.descripcion;
+    const observacion = req.body.observacion;
+    const prioridad = req.body.prioridad;
+    const fecha_inicio = req.body.fecha_inicio;
+    const fecha_fin = req.body.fecha_fin;
+
+    const task = {
+        descripcion : descripcion,
+        prioridad : prioridad,
+        observacion : observacion,
+        fecha_inicio :fecha_inicio,
+        fecha_fin : fecha_fin
+    }
+
+    modeloController.findOneAndUpdate({'_id' : taskId}, task).then(response =>{
+        if (err) {
+            return res.send(500, {error: err});
+        }
+        else{
+            console.log("Respuesta al insertar" + response);
+            return res.send('Succesfully saved.' + response);
+        }
+    
+    }
+    ).catch(err=>{
+    });
+
 }
 
 module.exports = {
@@ -77,5 +111,6 @@ module.exports = {
     traerTarea,
     crearUnaTarea,
     eliminarUnaTarea,
-    actualizarUnaTarea
+    actualizarUnaTarea,
+    traerTareaporCategoria
 }

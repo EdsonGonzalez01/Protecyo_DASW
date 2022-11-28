@@ -110,3 +110,49 @@ Header @leoacg
 	background-color: #ddd;
 	color: white;
   }
+
+
+  #tableCategories{
+	width: 100%;
+  }
+
+  .flex-container {
+    /* We first create a flex layout context */
+    display: flex;
+    
+    /* Then we define the flow direction 
+       and if we allow the items to wrap 
+     * Remember this is the same as:
+     * flex-direction: row;
+     * flex-wrap: wrap;
+     */
+    flex-flow: row wrap;
+    
+    /* Then we define how is distributed the remaining space */
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+	border: none;
+  }
+
+  .flex-item {
+    background: white;
+    padding: 5px;
+    /*height: 150px;*/
+    margin-top: 10px;
+
+	
+    /*line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;*/
+  }
+
+
+  .container{
+    background-color: #68b2f3;
+	margin-top: 30px;
+	padding-bottom: 50px;
+	border-radius: 10px;
+}

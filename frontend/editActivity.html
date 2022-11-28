@@ -23,7 +23,7 @@
 	<div id="ActContainer">
 			<form id="formTask" action="" method="post" name="FormEntrar" class="form-control-lg">
                 <div class="mb-3">
-                    <h1>Create a task to be done</h1>
+                    <h1>Edit a task to be done</h1>
                     <label for="descripcion" class="form-label">Task to be done</label>
                     <input type="text" name="descripcion" id="descripcion" class="form-Item form-control" placeholder="ej. Make the bed">
                     <label for="prioridad" class="form-label">Priority</label>
@@ -36,7 +36,7 @@
                     <input type="date" name="fecha_fin" class="form-Item" id="fecha_fin">
 
                     <div class="button-container">
-                        <button class="btn btn-lg btn-primary btn-block btn-signin" id="SignUP" type="submit">Create</button>	
+                        <button class="btn btn-lg btn-primary btn-block btn-signin" id="SignUP" type="submit">Save</button>	
                     </div>
                 </div>
 			</form>
@@ -44,9 +44,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.0/axios.min.js"></script>
     <script>
-        initCreateTask();
-        getCategoriesSelect();
+        initEditTask();
+        UpdateTask();
     </script>
+    
 </body>
 
 </html>

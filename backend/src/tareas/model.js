@@ -11,10 +11,10 @@ const schema = new Schema({
         type:String
     },        
     fecha_inicio: {
-        type:String
+        type:Date
     },
     fecha_fin: {
-        type:String
+        type:Date
     }
 });
 

@@ -4,16 +4,26 @@ function getTasks() {
         const contenedor = document.getElementById('taskList');
 
         tareas.forEach(element => {
+            const _id = element._id;
             const descripcion = element.descripcion;
             const fila = `                
                 <li class="list-group-item border-0 d-flex align-items-center ps-0">
-                    <input class="form-check-input me-3" type="checkbox" value="" aria-label="..." />
+                    <input class="form-check-input me-3" type="checkbox" onclick="completedTask('${_id}')" id ="${_id}" aria-label="..." />
                     ${descripcion}
                 </li>
             `;
             contenedor.innerHTML += fila;
         });
 
+    })
+}
+
+function completedTask(taskId) {
+    console.log("Completando tarea: " + taskId)
+    axios.put('http://localhost:3000/tasks/complete/'+taskId+'?token=123').then((respuesta) => {
+        console.log(respuesta);
+    }).then(data => {
+        location.reload()
     })
 }
 
@@ -70,22 +80,6 @@ function editTask(taskId) {
         const tarea = respuesta.data;
         console.log("Tarea front " + tarea.descripcion);
     }) 
-
-    /*axios.put('http://localhost:3000/tasks/update/'+taskId+'?token=123').then((respuesta) => { //http://localhost:3000/tasks/update/637ed7d8b886c63ac472227c?token=123    
-        //console.log(window.location)
-        const tarea = respuesta.data;
-        console.log("Tarea front" + tarea);
-        /*const contenedor = document.getElementById('priority');
-
-        categorias.forEach(element => {
-            const descripcion = element.descripcion;
-            const fila = `                
-                <option value="${descripcion}">${descripcion}</option>
-            `;
-            contenedor.innerHTML += fila;
-        });
-
-    }) */
 }
 
 
@@ -110,8 +104,12 @@ function getCategoriesSelect() {
 
 function initCreateTask() {
     const form = document.getElementById('formTask');
+    const divSuccess = document.getElementById("alert-success");
+    const divError = document.getElementById("alert-error");
+    divSuccess.style.visibility = 'hidden' ;
+    divError.style.visibility = 'hidden' ;
     const campos = {};
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', async function (event) {
         event.preventDefault();
         const elementosForm = this.querySelectorAll(".form-Item")
         console.log(elementosForm);
@@ -120,36 +118,80 @@ function initCreateTask() {
         })
         console.log(campos);
 
-        axios.post('http://localhost:3000/tasks/create?token=123', campos).then((respuesta) => {
-            console.log(respuesta);
-
-        });
+        const respuesta = await axiosCreate(campos);
+        console.log(respuesta);
+        if(respuesta != "error"){
+            divSuccess.textContent="Se creo correctamente la tarea: " + respuesta.data.descripcion;
+            divSuccess.style.visibility="visible"
+        }else{
+            divError.textContent="Ocurrio un error al crar la tarea" 
+            divError.style.visibility="visible"
+        }
     })
+}
+
+async function axiosCreate(campos) {
+    // create a promise for the axios request
+    try {
+        const respuesta = await axios.post('http://localhost:3000/tasks/create?token=123', campos) 
+        return(respuesta)
+    } catch (error) {
+        console.log(error);
+        return("error")
+    }
+    
 }
 
 function UpdateTask() {
+    
+    
     const form = document.getElementById('formTask');
     const campos = {};
-    console.log(document.location.search);
+    console.log("En el update task");
     let params = new URLSearchParams(document.location.search);
     const taskId = params.get("task")
-    form.addEventListener('submit', function (event) {
+    
+    form.addEventListener('submit', async function (event) {
+        console.log("Hubo un submit");
         event.preventDefault();
         const elementosForm = this.querySelectorAll(".form-Item")
         console.log(elementosForm);
         elementosForm.forEach(function (elemento) {
             campos[elemento.name] = elemento.value;
-        })
-        console.log(campos);
-
-        axios.put('http://localhost:3000/tasks/update/'+taskId+'?token=123', campos).then((respuesta) => {
-            console.log(respuesta);
         });
+        //console.log(campos);
+        const datos = await axiosUpdate(taskId, campos);
+        console.log(datos);
+        if(datos.status == 200){
+            const divSuccess = document.getElementById("alert-success");
+            divSuccess.textContent="Se edito correctamente la tarea" 
+            divSuccess.style.visibility="visible"
+        }
+        else{
+            const divError = document.getElementById("alert-error");
+            divError.textContent="Ocurrio un error al editar la tarea" 
+            divError.style.visibility="visible"
+        }
     })
 }
 
+async function axiosUpdate(taskId, campos) {
+    // create a promise for the axios request
+    try {
+        const respuesta = await axios.put('http://localhost:3000/tasks/update/'+taskId+'?token=123', campos)    
+        return(respuesta)
+    } catch (error) {
+        console.log(error);
+        return("error")
+    }
+    
+}
 
 function initEditTask() {
+    const divSuccess = document.getElementById("alert-success");
+    const divError = document.getElementById("alert-error");
+    divSuccess.style.visibility = 'hidden' ;
+    divError.style.visibility = 'hidden' ;
     console.log(document.location.search);
     let params = new URLSearchParams(document.location.search);
     const taskId = params.get("task")

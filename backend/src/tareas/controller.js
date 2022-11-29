@@ -9,7 +9,7 @@ function traerTarea(req, res){
         res.send("solo tareas pendientes")
     }
     else{
-        modeloController.find({}).then(response =>{
+        modeloController.find({prioridad : {$ne:"Completed"}}).then(response =>{
             console.log('Respuesta: ', response)
             res.send(response);
         }
@@ -68,9 +68,25 @@ function crearUnaTarea(req,res){
 
 }
 
-function eliminarUnaTarea(req,res){
-    const id = req.body.id;
-    res.send('Eliminando tarea ' + id)
+function completarUnaTarea(req,res){
+    const taskId = req.params.taskId;
+    const task = {
+        prioridad : "Completed",
+    }
+    modeloController.findOneAndUpdate({'_id' : taskId}, task).then(response =>{
+        if (err) {
+            return res.send(500, {error: err});
+        }
+        else{
+            console.log("Respuesta al insertar" + response);
+            return res.send('Succesfully saved.' + response);
+        }
+
+    }
+    ).catch(err=>{
+    });
+
+    res.send('Completando tarea ' + taskId)
 }
 
 function actualizarUnaTarea(req,res){
@@ -92,16 +108,11 @@ function actualizarUnaTarea(req,res){
     }
 
     modeloController.findOneAndUpdate({'_id' : taskId}, task).then(response =>{
-        if (err) {
-            return res.send(500, {error: err});
-        }
-        else{
-            console.log("Respuesta al insertar" + response);
-            return res.send('Succesfully saved.' + response);
-        }
-    
+        console.log("Respuesta al insertar" + response);
+        res.send('Succesfully saved.' + response);
     }
     ).catch(err=>{
+        res.send('Ocurrio un error' + err);
     });
 
 }
@@ -110,7 +121,7 @@ module.exports = {
     traerUnaTarea,
     traerTarea,
     crearUnaTarea,
-    eliminarUnaTarea,
+    completarUnaTarea,
     actualizarUnaTarea,
     traerTareaporCategoria
 }
